@@ -43,12 +43,22 @@ document.onkeyup = function(event) {
 
     // Determines which key was pressed
     let userGuess = event.key;
-
     // Alerts the key the user pressed (userGuess).
     alert("You chose " + userGuess);
-    //userGuess = userGuess.toString();
-    console.log("the user guess is " + userGuess);
-    console.log("the current random word is " + randomWord);
+
+    // argument for matching variables
+    //will use index of to see if userguess is in array
+    //??try foreach to replace "-" with userguess??
+    console.log(randomWord.indexOf(userGuess))
+    if (randomWord.indexOf(userGuess) >= 0) {
+      console.log(randomWord + " does contain " + userGuess);
+      
+    }
+    else{
+      console.log(randomWord + " does not have " + userGuess);
+    }
+
+  
 };
     //If userGuess is also in randomLetter, will reveal letter in blankArray
     // if (userGuess === randomLetter) {
