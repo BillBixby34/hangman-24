@@ -2,32 +2,41 @@
 const listOfPals = ["lamball", "anubis", "verdash", "cremis", "direhowl" ,"mau"]
 //hiddenPalImage will be the image
 let hiddenPalImage;
-
-let userGuess;
+//possibly use prompts to store value
+let userGuess = "";
+//will store user selections
+let userGuessArray = [];
 //randomWord will be the word chosen from listOfPals
 let randomWord = [];
 //randomLetter will be the randomWord seperated into an array by letter
 let randomLetter;
 //blankArray will have dashes until letters revealed
 let blankArray =[];
+//blanks will hold the number of blanks per randomLetter length
+let blanks = 0;
+let blankArrayText = document.getElementById("blank-space");
+
+
 let guesses = 7;
 let wins = 0;
 let losses = 0;
 //game start function
 function gameStart(){
   //will choose word from listOfPals
-  let hiddenPal = listOfPals[Math.floor(Math.random() * listOfPals.length)]
-  console.log("the pal is a " + hiddenPal);//works
-
-  randomWord = hiddenPal.split('');
+  randomWord = listOfPals[Math.floor(Math.random() * listOfPals.length)]
+  randomLetter = randomWord.split("");
+  console.log("The word looks like " + randomLetter);
   console.log(randomWord)//works
+  blanks = randomLetter.length;
   for (let i = 0; i < randomWord.length; i++) {
     blankArray.push(" _ ");
     //blankArray.join() doesn't clear commas
     //try another for loop??
     console.log(blankArray);
+
   }
-  
+  //set blankArray to html
+  blankArrayText.textContent = blankArray;
 }
 
 //test the gameStart function
@@ -37,25 +46,36 @@ console.log("The blankArray looks like " + blankArray)
 
 //chosen pal will have each letter as a new array
 
-//read user iputs
+
 
 document.onkeyup = function(event) {
 
-    // Determines which key was pressed
+    //read user iputs
     let userGuess = event.key;
     // Alerts the key the user pressed (userGuess).
     alert("You chose " + userGuess);
-
+    userGuessArray.push(userGuess);
+    console.log("The user has guessed " + userGuessArray)
     // argument for matching variables
     //will use index of to see if userguess is in array
-    //??try foreach to replace "-" with userguess??
-    console.log(randomWord.indexOf(userGuess))
-    if (randomWord.indexOf(userGuess) >= 0) {
-      console.log(randomWord + " does contain " + userGuess);
-      
+    if (randomLetter.indexOf(userGuess) >= 0) {
+    //loop through the length of the word/array to
+
+      for (let i = 0; i < randomWord.length; i++) {
+        if(randomWord[i] === userGuess){
+          console.log(randomWord[i])//works
+         blankArray[i] = userGuess;
+         console.log("the blank is " + blankArray[i])
+        
+          console.log("The blank array is now " + blankArray);
+        }
+        
+      }
     }
     else{
       console.log(randomWord + " does not have " + userGuess);
+      guesses--;
+      console.log("You now have " + guesses + " guesses left");
     }
 
   
