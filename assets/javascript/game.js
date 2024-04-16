@@ -36,7 +36,7 @@ function gameStart(){
 
   }
   //set blankArray to html
-  blankArrayText.textContent = blankArray;
+  blankArrayText.textContent = blankArray.join(" ");
 }
 
 //test the gameStart function
@@ -49,7 +49,7 @@ console.log("The blankArray looks like " + blankArray)
 
 
 document.onkeyup = function(event) {
-
+//want to add space bar to start game***
     //read user iputs
     let userGuess = event.key;
     // Alerts the key the user pressed (userGuess).
@@ -80,17 +80,7 @@ document.onkeyup = function(event) {
 
   
 };
-    //If userGuess is also in randomLetter, will reveal letter in blankArray
-    // if (userGuess === randomLetter) {
-    //   //blankArray '-' should be replaced by randomLetter
-    //   blankArray[i] === randomLetter;
-    //   console.log("The blank array looks like " + blankArray)
-    // } else {
-    //    //if userGuess is not in randomLetter, guesses--;
-    //   guesses--;
-    //   console.log("You have " + guesses + " guesses left")
-    //   //guesses should decrease on html
-    // }
+  
     //If blankArray === randomLetter, wins++;
    
 
