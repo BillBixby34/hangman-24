@@ -22,16 +22,15 @@ let wins = 0;
 let losses = 0;
 //game start function
 function gameStart(){
+  guesses = 7;
   //will choose word from listOfPals
   randomWord = listOfPals[Math.floor(Math.random() * listOfPals.length)]
+  //split randomWord into an array
   randomLetter = randomWord.split("");
-  console.log("The word looks like " + randomLetter);
-  console.log(randomWord)//works
-  blanks = randomLetter.length;
+  //set blanks equal to length of randomLetter array
+  // blanks = randomLetter.length;
   for (let i = 0; i < randomWord.length; i++) {
     blankArray.push(" _ ");
-    //blankArray.join() doesn't clear commas
-    //try another for loop??
     console.log(blankArray);
 
   }
@@ -39,14 +38,48 @@ function gameStart(){
   blankArrayText.textContent = blankArray.join(" ");
 }
 
+//update score function
+function updateScore(){
+  document.getElementById("wins").innerHTML( wins);
+  document.getElementById("losses").innerHTML(losses);
+  document.getElementById("guesses").innerHTML(guesses);
+ }
+
+//function to set image to div
+function setImage(image){
+let img = document.createElement("IMG");
+    img.src = "images/"+image;
+    document.getElementById('image').appendChild(img);
+}
 //test the gameStart function
 gameStart();
 console.log("The blankArray looks like " + blankArray)
 //choose pal at index of array??
 
-//chosen pal will have each letter as a new array
+//check if game is over
+function scoreGame(){
+  document.getElementById("wins").innerHTML = wins;
+  document.getElementById("losses").innerHTML = losses;
+  document.getElementById("guesses").innerHTML = guesses;
+  if (guesses = 0) {
+    alert ("game over");
+    losses++;
+    //update html to show loss
+    //updateScore();
+    gameStart();
+    //if player has guessed the word
+  } else if (blankArray === randomLetter){
+    alert("You win!");
+    wins++;
+    setImage(randomWord);
+    //update html to show win
+   // updateScore();
+    gameStart();
 
-
+  }
+};
+   //update score function
+   
 
 document.onkeyup = function(event) {
 //want to add space bar to start game***
@@ -62,20 +95,25 @@ document.onkeyup = function(event) {
     //loop through the length of the word/array to
 
       for (let i = 0; i < randomWord.length; i++) {
-        if(randomWord[i] === userGuess){
+        if(userGuess === randomWord[i]){
           console.log(randomWord[i])//works
          blankArray[i] = userGuess;
+          //set blankArray to html
+        blankArrayText.textContent = blankArray.join(" ");
          console.log("the blank is " + blankArray[i])
         
           console.log("The blank array is now " + blankArray);
+          scoreGame();
         }
         
       }
     }
-    else{
+    else if(randomLetter.indexOf(userGuess) < 0){
       console.log(randomWord + " does not have " + userGuess);
       guesses--;
+      
       console.log("You now have " + guesses + " guesses left");
+      scoreGame();
     }
 
   

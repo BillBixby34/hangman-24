@@ -1,0 +1,13 @@
+body {
+    background-color: cornflowerblue;
+}
+
+#score-card {
+    border: 5px 5px;
+    border-color: orange;
+}
+
+#image {
+    width: 300px;
+    height: 400px;
+}
